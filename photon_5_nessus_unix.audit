@@ -12,7 +12,7 @@
   file        : "/etc/os-release"
   regex       : "^PRETTY_NAME=\"VMware Photon OS 5.*\"$"
   expect      : "^PRETTY_NAME=\"VMware Photon OS 5.*\"$"
-  severity    : INFO
+  severity    : LOW
 </custom_item>
 <custom_item>
   type        : FILE_CONTENT_CHECK
@@ -20,7 +20,7 @@
   file        : "/etc/os-release"
   regex       : "^NAME=\"VMware Photon OS\"$"
   expect      : "^NAME=\"VMware Photon OS\"$"
-  severity    : INFO
+  severity    : LOW
 </custom_item>
 <custom_item>
   type        : FILE_CONTENT_CHECK
@@ -28,7 +28,7 @@
   file        : "/etc/os-release"
   regex       : "^VERSION_ID=\"5.*\"$"
   expect      : "^VERSION_ID=\"5.*\"$"
-  severity    : INFO
+  severity    : LOW
 </custom_item>
 
 # ======================= SSHD parameters =======================

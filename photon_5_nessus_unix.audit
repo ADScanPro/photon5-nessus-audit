@@ -1,0 +1,1318 @@
+<check_type: "Unix">
+
+# Photon OS 5 Nessus Unix Compliance Checks
+# This audit was generated from VMware Photon OS 5 STIG-like controls.
+# Each custom_item contains traceability to the originating Ruby control.
+
+# --- Platform guard: Ensure target is Photon OS 5 ---
+# Source: os identification (helper)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "Operating system must be VMware Photon OS 5"
+  file        : "/etc/os-release"
+  regex       : "^PRETTY_NAME=\"VMware Photon OS 5.*\"$"
+  expect      : "^PRETTY_NAME=\"VMware Photon OS 5.*\"$"
+  severity    : INFO
+</custom_item>
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "Operating system NAME must be VMware Photon OS"
+  file        : "/etc/os-release"
+  regex       : "^NAME=\"VMware Photon OS\"$"
+  expect      : "^NAME=\"VMware Photon OS\"$"
+  severity    : INFO
+</custom_item>
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "Operating system VERSION_ID must be 5"
+  file        : "/etc/os-release"
+  regex       : "^VERSION_ID=\"5.*\"$"
+  expect      : "^VERSION_ID=\"5.*\"$"
+  severity    : INFO
+</custom_item>
+
+# ======================= SSHD parameters =======================
+# Source: PHTN-50-000200.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD SyslogFacility must be AUTHPRIV or AUTH"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^syslogfacility'"
+  expect      : "^SyslogFacility (AUTHPRIV|AUTH)$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000201.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD LogLevel must be INFO"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^loglevel'"
+  expect      : "^LogLevel INFO$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000069.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD ClientAliveInterval must be 900"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^clientaliveinterval'"
+  expect      : "^ClientAliveInterval 900$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000203.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD ClientAliveCountMax must be 0"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^clientalivecountmax'"
+  expect      : "^ClientAliveCountMax 0$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000221.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD LoginGraceTime must be 30 seconds"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^logingracetime'"
+  expect      : "^LoginGraceTime 30$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000207.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must not allow empty passwords"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^permitemptypasswords'"
+  expect      : "^PermitEmptyPasswords no$"
+  severity    : HIGH
+</custom_item>
+
+# Source: PHTN-50-000208.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set PermitUserEnvironment no"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^permituserenvironment'"
+  expect      : "^PermitUserEnvironment no$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000211.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set GSSAPIAuthentication no"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^gssapiauthentication'"
+  expect      : "^GSSAPIAuthentication no$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000214.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set KerberosAuthentication no"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^kerberosauthentication'"
+  expect      : "^KerberosAuthentication no$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000216.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set PrintLastLog yes"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^printlastlog'"
+  expect      : "^PrintLastLog yes$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000215.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set Compression no"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^compression'"
+  expect      : "^Compression no$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000212.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set X11Forwarding no"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^x11forwarding'"
+  expect      : "^X11Forwarding no$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000217.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set IgnoreRhosts yes"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^ignorerhosts'"
+  expect      : "^IgnoreRhosts yes$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000218.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set IgnoreUserKnownHosts yes"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^ignoreuserknownhosts'"
+  expect      : "^IgnoreUserKnownHosts yes$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000219.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set MaxAuthTries 6"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^maxauthtries'"
+  expect      : "^MaxAuthTries 6$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000213.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set StrictModes yes"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^strictmodes'"
+  expect      : "^StrictModes yes$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000220.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set AllowTcpForwarding no"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^allowtcpforwarding'"
+  expect      : "^AllowTcpForwarding no$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000005.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must set Banner /etc/issue"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^banner'"
+  expect      : "^Banner /etc/issue$"
+  severity    : LOW
+</custom_item>
+
+# Source: PHTN-50-000079.rb (approved Ciphers)
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must use only approved Ciphers"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^ciphers '"
+  expect      : "^ciphers (aes256-gcm@openssh.com|aes128-gcm@openssh.com|aes256-ctr|aes192-ctr|aes128-ctr)(,(aes256-gcm@openssh.com|aes128-gcm@openssh.com|aes256-ctr|aes192-ctr|aes128-ctr))*$"
+  info        : "Output must be a subset of approved list: aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"
+  severity    : HIGH
+</custom_item>
+
+# Source: PHTN-50-000239.rb (approved MACs)
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD must use only approved MACs"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^macs '"
+  expect      : "^macs (hmac-sha2-512|hmac-sha2-256)(,(hmac-sha2-512|hmac-sha2-256))*$"
+  info        : "Output must be a subset of approved list: hmac-sha2-512,hmac-sha2-256"
+  severity    : HIGH
+</custom_item>
+
+# ======================= PAM and password policy =======================
+# Source: PHTN-50-000059.rb
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "PAM must configure pam_unix.so with sha512"
+  file        : "/etc/pam.d/system-password"
+  regex       : "^password\\s+(required|requisite)\\s+pam_unix\\.so.*\\bsha512\\b"
+  expect      : "^password\\s+(required|requisite)\\s+pam_unix\\.so.*\\bsha512\\b"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000247.rb
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "PAM must not allow null passwords in system-password"
+  file        : "/etc/pam.d/system-password"
+  regex       : "^password\\s+.*\\s+pam_unix\\.so.*\\bnullok\\b"
+  expect      : "NOT MATCHED"
+  severity    : HIGH
+</custom_item>
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "PAM must not allow null passwords in system-auth"
+  file        : "/etc/pam.d/system-auth"
+  regex       : "^auth\\s+.*\\s+pam_unix\\.so.*\\bnullok\\b"
+  expect      : "NOT MATCHED"
+  severity    : HIGH
+</custom_item>
+
+# Source: PHTN-50-000197.rb
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "PAM must use pam_pwquality on password line"
+  file        : "/etc/pam.d/system-password"
+  regex       : "^password\\s+(required|requisite)\\s+pam_pwquality\\.so\\s+.*"
+  expect      : "^password\\s+(required|requisite)\\s+pam_pwquality\\.so\\s+.*"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000044.rb (minlen >= 15)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pwquality: minlen >= 15 (pwquality.conf)"
+  file        : "/etc/security/pwquality.conf"
+  regex       : "^minlen\\s*=\\s*(1[5-9]|[2-9][0-9]+)$"
+  expect      : "^minlen\\s*=\\s*(1[5-9]|[2-9][0-9]+)$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pwquality: minlen >= 15 (pam line)"
+  file        : "/etc/pam.d/system-password"
+  regex       : "^password\\s+(required|requisite)\\s+pam_pwquality\\.so.*\\bminlen=(1[5-9]|[2-9][0-9]+)\\b"
+  expect      : "^password\\s+(required|requisite)\\s+pam_pwquality\\.so.*\\bminlen=(1[5-9]|[2-9][0-9]+)\\b"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000035.rb (ucredit < 0)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pwquality: ucredit = -1"
+  file        : "/etc/security/pwquality.conf"
+  regex       : "^ucredit\\s*=\\s*-1$"
+  expect      : "^ucredit\\s*=\\s*-1$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000037.rb (dcredit < 0)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pwquality: dcredit = -1"
+  file        : "/etc/security/pwquality.conf"
+  regex       : "^dcredit\\s*=\\s*-1$"
+  expect      : "^dcredit\\s*=\\s*-1$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000036.rb (lcredit < 0)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pwquality: lcredit = -1"
+  file        : "/etc/security/pwquality.conf"
+  regex       : "^lcredit\\s*=\\s*-1$"
+  expect      : "^lcredit\\s*=\\s*-1$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000086.rb (ocredit < 0)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pwquality: ocredit = -1"
+  file        : "/etc/security/pwquality.conf"
+  regex       : "^ocredit\\s*=\\s*-1$"
+  expect      : "^ocredit\\s*=\\s*-1$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000038.rb (difok >= 8)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pwquality: difok >= 8"
+  file        : "/etc/security/pwquality.conf"
+  regex       : "^difok\\s*=\\s*(8|[9]|[1-9][0-9]+)$"
+  expect      : "^difok\\s*=\\s*(8|[9]|[1-9][0-9]+)$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000184.rb (dictcheck = 1)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pwquality: dictcheck = 1"
+  file        : "/etc/security/pwquality.conf"
+  regex       : "^dictcheck\\s*=\\s*1$"
+  expect      : "^dictcheck\\s*=\\s*1$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000235.rb (enforce_for_root present)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pwquality: enforce_for_root must be present"
+  file        : "/etc/security/pwquality.conf"
+  regex       : "^enforce_for_root(\s*=.*)?$"
+  expect      : "^enforce_for_root(\s*=.*)?$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000043.rb (pwhistory remember >= 5)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pam_pwhistory: remember >= 5"
+  file        : "/etc/pam.d/system-password"
+  regex       : "^password\\s+(required|requisite)\\s+pam_pwhistory\\.so.*\\bremember=([5-9]|[1-9][0-9]+)\\b"
+  expect      : "^password\\s+(required|requisite)\\s+pam_pwhistory\\.so.*\\bremember=([5-9]|[1-9][0-9]+)\\b"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000243.rb (pwhistory use_authtok)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pam_pwhistory: use_authtok must be present"
+  file        : "/etc/pam.d/system-password"
+  regex       : "^password\\s+(required|requisite)\\s+pam_pwhistory\\.so.*\\buse_authtok\\b"
+  expect      : "^password\\s+(required|requisite)\\s+pam_pwhistory\\.so.*\\buse_authtok\\b"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= login.defs =======================
+# Source: PHTN-50-000039.rb
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "login.defs must set ENCRYPT_METHOD SHA512"
+  file        : "/etc/login.defs"
+  regex       : "^ENCRYPT_METHOD\\s+SHA512$"
+  expect      : "^ENCRYPT_METHOD\\s+SHA512$"
+  severity    : HIGH
+</custom_item>
+
+# ======================= Additional login.defs =======================
+# Source: PHTN-50-000041.rb (PASS_MIN_DAYS 1)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "login.defs must set PASS_MIN_DAYS 1"
+  file        : "/etc/login.defs"
+  regex       : "^PASS_MIN_DAYS\s+1$"
+  expect      : "^PASS_MIN_DAYS\s+1$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000042.rb (PASS_MAX_DAYS <= 90)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "login.defs must set PASS_MAX_DAYS <= 90 and not -1"
+  file        : "/etc/login.defs"
+  regex       : "^PASS_MAX_DAYS\s+([0-9]+)$"
+  expect      : "^PASS_MAX_DAYS\s+([0-8]?[0-9]|90)$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000185.rb (FAIL_DELAY >= 4)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "login.defs must set FAIL_DELAY >= 4"
+  file        : "/etc/login.defs"
+  regex       : "^FAIL_DELAY\s+([4-9]|[1-9][0-9]+)$"
+  expect      : "^FAIL_DELAY\s+([4-9]|[1-9][0-9]+)$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000187.rb (UMASK 077)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "login.defs must set UMASK 077"
+  file        : "/etc/login.defs"
+  regex       : "^UMASK\s+077$"
+  expect      : "^UMASK\s+077$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000209.rb (CREATE_HOME yes)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "login.defs must set CREATE_HOME yes"
+  file        : "/etc/login.defs"
+  regex       : "^CREATE_HOME\s+yes$"
+  expect      : "^CREATE_HOME\s+yes$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Session inactivity TMOUT =======================
+# Source: PHTN-50-000093.rb (TMOUT=900 via /etc/profile.d/tmout.sh)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "Shell inactivity timeout: TMOUT=900 and readonly export"
+  file        : "/etc/profile.d/tmout.sh"
+  regex       : "(?s)^TMOUT=900\nreadonly TMOUT\nexport TMOUT$"
+  expect      : "(?s)^TMOUT=900\nreadonly TMOUT\nexport TMOUT$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= auditd rules (auditctl -l) =======================
+# Source: PHTN-50-000003.rb (useradd/groupadd)
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must audit useradd execution"
+  cmd         : "/sbin/auditctl -l | grep -E 'useradd'"
+  expect      : "-w /usr/sbin/useradd -p x -k useradd"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must audit groupadd execution"
+  cmd         : "/sbin/auditctl -l | grep -E 'groupadd'"
+  expect      : "-w /usr/sbin/groupadd -p x -k groupadd"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000076.rb (usermod/groupmod)
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must audit usermod execution"
+  cmd         : "/sbin/auditctl -l | grep -E 'usermod'"
+  expect      : "-w /usr/sbin/usermod -p x -k usermod"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must audit groupmod execution"
+  cmd         : "/sbin/auditctl -l | grep -E 'groupmod'"
+  expect      : "-w /usr/sbin/groupmod -p x -k groupmod"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000078.rb (userdel/groupdel)
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must audit userdel execution"
+  cmd         : "/sbin/auditctl -l | grep -E 'userdel'"
+  expect      : "-w /usr/sbin/userdel -p x -k userdel"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must audit groupdel execution"
+  cmd         : "/sbin/auditctl -l | grep -E 'groupdel'"
+  expect      : "-w /usr/sbin/groupdel -p x -k groupdel"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000204.rb (passwd/shadow/group/gshadow)
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must watch /etc/passwd"
+  cmd         : "/sbin/auditctl -l | grep -E '/etc/passwd'"
+  expect      : "-w /etc/passwd -p wa -k passwd"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must watch /etc/shadow"
+  cmd         : "/sbin/auditctl -l | grep -E '/etc/shadow'"
+  expect      : "-w /etc/shadow -p wa -k shadow"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must watch /etc/group"
+  cmd         : "/sbin/auditctl -l | grep -E '/etc/group'"
+  expect      : "-w /etc/group -p wa -k group"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must watch /etc/gshadow"
+  cmd         : "/sbin/auditctl -l | grep -E '/etc/gshadow'"
+  expect      : "-w /etc/gshadow -p wa -k gshadow"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000173.rb (logons)
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must watch /var/log/faillog"
+  cmd         : "/sbin/auditctl -l | grep -E '/var/log/faillog'"
+  expect      : "-w /var/log/faillog -p wa -k logons"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must watch /var/log/lastlog"
+  cmd         : "/sbin/auditctl -l | grep -E '/var/log/lastlog'"
+  expect      : "-w /var/log/lastlog -p wa -k logons"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must watch /var/log/tallylog"
+  cmd         : "/sbin/auditctl -l | grep -E '/var/log/tallylog'"
+  expect      : "-w /var/log/tallylog -p wa -k logons"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000238.rb (opasswd)
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must watch /etc/security/opasswd"
+  cmd         : "/sbin/auditctl -l | grep -E '/etc/security/opasswd'"
+  expect      : "-w /etc/security/opasswd -p wa -k opasswd"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000019.rb (execpriv rules)
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must log execve with euid=0 (b32)"
+  cmd         : "/sbin/auditctl -l | grep -E '-S execve' | grep -E 'arch=b32' | grep -E 'uid!=euid' | grep -E 'euid=0' | grep -E 'key=execpriv'"
+  expect      : "-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F key=execpriv"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must log execve with euid=0 (b64)"
+  cmd         : "/sbin/auditctl -l | grep -E '-S execve' | grep -E 'arch=b64' | grep -E 'uid!=euid' | grep -E 'euid=0' | grep -E 'key=execpriv'"
+  expect      : "-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -F key=execpriv"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must log execve with egid=0 (b32)"
+  cmd         : "/sbin/auditctl -l | grep -E '-S execve' | grep -E 'arch=b32' | grep -E 'gid!=egid' | grep -E 'egid=0' | grep -E 'key=execpriv'"
+  expect      : "-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -F key=execpriv"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must log execve with egid=0 (b64)"
+  cmd         : "/sbin/auditctl -l | grep -E '-S execve' | grep -E 'arch=b64' | grep -E 'gid!=egid' | grep -E 'egid=0' | grep -E 'key=execpriv'"
+  expect      : "-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -F key=execpriv"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000031.rb (perm_mod rules)
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must log DAC permission/modification syscalls (b64)"
+  cmd         : "/sbin/auditctl -l | grep -E 'arch=b64' | grep -E 'key=perm_mod' | grep -E 'chmod|fchmod|chown|fchown|lchown|setxattr|lsetxattr|fsetxattr|removexattr|lremovexattr|fremovexattr|fchownat|fchmodat'"
+  expect      : "-a always,exit -F arch=b64 -S chmod,fchmod,chown,fchown,lchown,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr,fchownat,fchmodat -F auid>=1000 -F auid!=-1 -F key=perm_mod"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must log DAC permission/modification syscalls (b32)"
+  cmd         : "/sbin/auditctl -l | grep -E 'arch=b32' | grep -E 'key=perm_mod' | grep -E 'chmod|lchown|fchmod|fchown|chown|setxattr|lsetxattr|fsetxattr|removexattr|lremovexattr|fremovexattr|fchownat|fchmodat'"
+  expect      : "-a always,exit -F arch=b32 -S chmod,lchown,fchmod,fchown,chown,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr,fchownat,fchmodat -F auid>=1000 -F auid!=-1 -F key=perm_mod"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000175.rb (init_module)
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must log init_module (b32)"
+  cmd         : "/sbin/auditctl -l | grep -E 'arch=b32' | grep -E 'init_module' | grep -E 'key=modules'"
+  expect      : "-a always,exit -F arch=b32 -S init_module -F key=modules"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd must log init_module (b64)"
+  cmd         : "/sbin/auditctl -l | grep -E 'arch=b64' | grep -E 'init_module' | grep -E 'key=modules'"
+  expect      : "-a always,exit -F arch=b64 -S init_module -F key=modules"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= tdnf.conf =======================
+# Source: PHTN-50-000130.rb (gpgcheck)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "tdnf.conf: gpgcheck must be enabled"
+  file        : "/etc/tdnf/tdnf.conf"
+  regex       : "^\s*gpgcheck\s*=\s*(1|true|yes)\s*$"
+  expect      : "^\s*gpgcheck\s*=\s*(1|true|yes)\s*$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000161.rb (clean_requirements_on_remove)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "tdnf.conf: clean_requirements_on_remove must be enabled"
+  file        : "/etc/tdnf/tdnf.conf"
+  regex       : "^\s*clean_requirements_on_remove\s*=\s*(1|true|yes)\s*$"
+  expect      : "^\s*clean_requirements_on_remove\s*=\s*(1|true|yes)\s*$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Time synchronization =======================
+# Source: PHTN-50-000121.rb (timesyncd)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "timesyncd must define NTP servers (if used)"
+  file        : "/etc/systemd/timesyncd.conf"
+  regex       : "^NTP=.+$"
+  expect      : "^NTP=.+$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000121.rb (ntpd)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "ntpd must define at least one server (if used)"
+  file        : "/etc/ntp.conf"
+  regex       : "^\s*(server|peer|multicastclient)\s+.+$"
+  expect      : "^\s*(server|peer|multicastclient)\s+.+$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000121.rb (chrony)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "chrony must define at least one server (if used)"
+  file        : "/etc/chrony/chrony.conf"
+  regex       : "^\s*server\s+.+$"
+  expect      : "^\s*server\s+.+$"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= PAM faillock and faildelay =======================
+# Source: PHTN-50-000206.rb (pam_faildelay delay=4000000)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pam_faildelay: delay must be >= 4 seconds (4,000,000 microseconds)"
+  file        : "/etc/pam.d/system-auth"
+  regex       : "^auth\s+(required|requisite|optional)\s+pam_faildelay\.so\s+.*\bdelay=4000000\b"
+  expect      : "^auth\s+(required|requisite|optional)\s+pam_faildelay\.so\s+.*\bdelay=4000000\b"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000192.rb (pam_faillock presence and order)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pam_faillock: preauth line present before pam_unix.so"
+  file        : "/etc/pam.d/system-auth"
+  regex       : "^auth\s+(required|requisite)\s+pam_faillock\.so\s+.*\bpreauth\b.*\n^auth\s+(required|requisite)\s+pam_unix\.so"
+  expect      : "^auth\s+(required|requisite)\s+pam_faillock\.so\s+.*\bpreauth\b.*\n^auth\s+(required|requisite)\s+pam_unix\.so"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pam_faillock: authfail line present after pam_unix.so"
+  file        : "/etc/pam.d/system-auth"
+  regex       : "^auth\s+(required|requisite)\s+pam_unix\.so.*\n^auth\s+(required|requisite|\[default=die\])\s+pam_faillock\.so\s+.*\bauthfail\b"
+  expect      : "^auth\s+(required|requisite)\s+pam_unix\.so.*\n^auth\s+(required|requisite|\[default=die\])\s+pam_faillock\.so\s+.*\bauthfail\b"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "pam_faillock: account line present before pam_unix.so"
+  file        : "/etc/pam.d/system-account"
+  regex       : "^account\s+(required|requisite)\s+pam_faillock\.so.*\n^account\s+(required|requisite)\s+pam_unix\.so"
+  expect      : "^account\s+(required|requisite)\s+pam_faillock\.so.*\n^account\s+(required|requisite)\s+pam_unix\.so"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000193.rb (silent)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "faillock.conf must set 'silent'"
+  file        : "/etc/security/faillock.conf"
+  regex       : "^\s*silent\s*$"
+  expect      : "^\s*silent\s*$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000194.rb (audit)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "faillock.conf must set 'audit'"
+  file        : "/etc/security/faillock.conf"
+  regex       : "^\s*audit\s*$"
+  expect      : "^\s*audit\s*$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000195.rb (even_deny_root)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "faillock.conf must set 'even_deny_root'"
+  file        : "/etc/security/faillock.conf"
+  regex       : "^\s*even_deny_root\s*$"
+  expect      : "^\s*even_deny_root\s*$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000196.rb (dir=/var/log/faillock)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "faillock.conf must set dir=/var/log/faillock"
+  file        : "/etc/security/faillock.conf"
+  regex       : "^\s*dir\s*=\s*/var/log/faillock\s*$"
+  expect      : "^\s*dir\s*=\s*/var/log/faillock\s*$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000108.rb (unlock_time = 0)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "faillock.conf must set unlock_time = 0"
+  file        : "/etc/security/faillock.conf"
+  regex       : "^\s*unlock_time\s*=\s*0\s*$"
+  expect      : "^\s*unlock_time\s*=\s*0\s*$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000004.rb (deny <= 3, fail_interval >= 900)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "faillock.conf must set deny <= 3"
+  file        : "/etc/security/faillock.conf"
+  regex       : "^\s*deny\s*=\s*([0-3])\s*$"
+  expect      : "^\s*deny\s*=\s*([1-3])\s*$"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "faillock.conf must set fail_interval >= 900"
+  file        : "/etc/security/faillock.conf"
+  regex       : "^\s*fail_interval\s*=\s*([9][0-9]{2}|[1-9][0-9]{3,})\s*$"
+  expect      : "^\s*fail_interval\s*=\s*(900|9[0-9]{2}|[1-9][0-9]{3,})\s*$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= rsyslog =======================
+# Source: PHTN-50-000074.rb ($umask 0037)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "rsyslog.conf must set $umask 0037"
+  file        : "/etc/rsyslog.conf"
+  regex       : "^\$umask\s0037$"
+  expect      : "^\$umask\s0037$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000111.rb (remote syslog server)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "rsyslog.conf must offload logs to remote syslog server"
+  file        : "/etc/rsyslog.conf"
+  regex       : "^\*\.\*.*;RSYSLOG_SyslogProtocol23Format$"
+  expect      : "^\*\.\*.*;RSYSLOG_SyslogProtocol23Format$"
+  info        : "Parameterize server via policy variable if needed."
+  severity    : LOW
+</custom_item>
+
+# ======================= Extra SSH hardening =======================
+# Source: PHTN-50-000188.rb (HostbasedAuthentication no)
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSHD HostbasedAuthentication must be no"
+  cmd         : "/usr/sbin/sshd -T 2>&1 | grep -i '^hostbasedauthentication'"
+  expect      : "^HostbasedAuthentication no$"
+  severity    : HIGH
+</custom_item>
+
+# ======================= Kernel/sysctl hardening =======================
+# Source: PHTN-50-000231.rb (ip_forward = 0) - marked optional for container hosts
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl net.ipv4.ip_forward must be 0 (N/A for container hosts)"
+  cmd         : "/sbin/sysctl net.ipv4.ip_forward 2>/dev/null || cat /proc/sys/net/ipv4/ip_forward"
+  expect      : "(net.ipv4.ip_forward = 0|^0$)"
+  optional    : YES
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000223.rb (accept_source_route = 0 for v4/v6)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl accept_source_route must be 0 (all,default for v4/v6)"
+  cmd         : "/sbin/sysctl -a --pattern 'net.ipv[4|6]\\.conf\\.(all|default)\\.accept_source_route' 2>/dev/null"
+  expect      : "^(net\\.ipv4\\.conf\\.(all|default)\\.accept_source_route = 0|net\\.ipv6\\.conf\\.(all|default)\\.accept_source_route = 0)"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000224.rb (icmp_echo_ignore_broadcasts = 1)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl net.ipv4.icmp_echo_ignore_broadcasts must be 1"
+  cmd         : "/sbin/sysctl net.ipv4.icmp_echo_ignore_broadcasts 2>/dev/null || cat /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts"
+  expect      : "(net.ipv4.icmp_echo_ignore_broadcasts = 1|^1$)"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000225.rb (accept_redirects = 0)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl accept_redirects must be 0 (all,default for v4)"
+  cmd         : "/sbin/sysctl -a --pattern 'net.ipv4.conf.(all|default).accept_redirects' 2>/dev/null"
+  expect      : "^net\\.ipv4\\.conf\\.(all|default)\\.accept_redirects = 0$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000226.rb (secure_redirects = 0)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl secure_redirects must be 0 (all,default for v4)"
+  cmd         : "/sbin/sysctl -a --pattern 'net.ipv4.conf.(all|default).secure_redirects' 2>/dev/null"
+  expect      : "^net\\.ipv4\\.conf\\.(all|default)\\.secure_redirects = 0$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000227.rb (send_redirects = 0)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl send_redirects must be 0 (all,default for v4)"
+  cmd         : "/sbin/sysctl -a --pattern 'net.ipv4.conf.(all|default).send_redirects' 2>/dev/null"
+  expect      : "^net\\.ipv4\\.conf\\.(all|default)\\.send_redirects = 0$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000228.rb (log_martians = 1)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl log_martians must be 1 (all,default for v4)"
+  cmd         : "/sbin/sysctl -a --pattern 'net.ipv4.conf.(all|default).log_martians' 2>/dev/null"
+  expect      : "^net\\.ipv4\\.conf\\.(all|default)\\.log_martians = 1$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000229.rb (rp_filter = 1)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl rp_filter must be 1 (all,default for v4)"
+  cmd         : "/sbin/sysctl -a --pattern 'net.ipv4.conf.(all|default).rp_filter' 2>/dev/null"
+  expect      : "^net\\.ipv4\\.conf\\.(all|default)\\.rp_filter = 1$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000232.rb (tcp_timestamps = 1)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl net.ipv4.tcp_timestamps must be 1"
+  cmd         : "/sbin/sysctl net.ipv4.tcp_timestamps 2>/dev/null || cat /proc/sys/net/ipv4/tcp_timestamps"
+  expect      : "(net.ipv4.tcp_timestamps = 1|^1$)"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000068.rb (tcp_syncookies = 1)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl net.ipv4.tcp_syncookies must be 1"
+  cmd         : "/sbin/sysctl net.ipv4.tcp_syncookies 2>/dev/null || cat /proc/sys/net/ipv4/tcp_syncookies"
+  expect      : "(net.ipv4.tcp_syncookies = 1|^1$)"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000067.rb (kernel.dmesg_restrict = 1)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl kernel.dmesg_restrict must be 1"
+  cmd         : "/sbin/sysctl kernel.dmesg_restrict 2>/dev/null || cat /proc/sys/kernel/dmesg_restrict"
+  expect      : "(kernel.dmesg_restrict = 1|^1$)"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000160.rb (ASLR randomize_va_space = 2)
+<custom_item>
+  type        : CMD_EXEC
+  description : "ASLR must be enabled (kernel.randomize_va_space=2)"
+  cmd         : "cat /proc/sys/kernel/randomize_va_space"
+  expect      : "^2$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000105.rb (fs.protected_symlinks = 1)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl fs.protected_symlinks must be 1"
+  cmd         : "/sbin/sysctl fs.protected_symlinks 2>/dev/null || cat /proc/sys/fs/protected_symlinks"
+  expect      : "(fs.protected_symlinks = 1|^1$)"
+  severity    : HIGH
+</custom_item>
+
+# Source: PHTN-50-000244.rb (fs.protected_hardlinks = 1)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl fs.protected_hardlinks must be 1"
+  cmd         : "/sbin/sysctl fs.protected_hardlinks 2>/dev/null || cat /proc/sys/fs/protected_hardlinks"
+  expect      : "(fs.protected_hardlinks = 1|^1$)"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000246.rb (fs.suid_dumpable = 0)
+<custom_item>
+  type        : CMD_EXEC
+  description : "sysctl fs.suid_dumpable must be 0"
+  cmd         : "/sbin/sysctl fs.suid_dumpable 2>/dev/null || cat /proc/sys/fs/suid_dumpable"
+  expect      : "(fs.suid_dumpable = 0|^0$)"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= FIPS mode =======================
+# Source: PHTN-50-000182.rb (fips_enabled = 1)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "FIPS mode must be enabled (fips_enabled=1)"
+  file        : "/proc/sys/crypto/fips_enabled"
+  regex       : "^1$"
+  expect      : "^1$"
+  severity    : HIGH
+</custom_item>
+
+# ======================= auditd service state =======================
+# Source: PHTN-50-000016.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd service must be installed, enabled and running"
+  cmd         : "systemctl is-enabled auditd 2>/dev/null && systemctl is-active auditd 2>/dev/null"
+  expect      : "^enabled$\n^active$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= auditd.conf configuration =======================
+# Source: PHTN-50-000014.rb (write_logs = yes)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "auditd.conf must set write_logs = yes (or be unset)"
+  file        : "/etc/audit/auditd.conf"
+  regex       : "^(write_logs\s*=\s*yes)$|^(?s)(?!.*^write_logs\s*=).*\z"
+  expect      : "^(write_logs\s*=\s*yes)$|^(?s)(?!.*^write_logs\s*=).*\z"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000021.rb (SYSLOG actions)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "auditd.conf disk/admin actions must be SYSLOG"
+  file        : "/etc/audit/auditd.conf"
+  regex       : "(?s)^admin_space_left_action\s*=\s*SYSLOG$.*^disk_full_action\s*=\s*SYSLOG$.*^disk_error_action\s*=\s*SYSLOG$"
+  expect      : "(?s)^admin_space_left_action\s*=\s*SYSLOG$.*^disk_full_action\s*=\s*SYSLOG$.*^disk_error_action\s*=\s*SYSLOG$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000110.rb (num_logs >= 5, max_log_file_action = ROTATE)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "auditd.conf must set num_logs >= 5 and max_log_file_action = ROTATE"
+  file        : "/etc/audit/auditd.conf"
+  regex       : "(?s)^num_logs\s*=\s*([5-9]|[1-9][0-9]+)$.*^max_log_file_action\s*=\s*ROTATE$"
+  expect      : "(?s)^num_logs\s*=\s*([5-9]|[1-9][0-9]+)$.*^max_log_file_action\s*=\s*ROTATE$"
+  severity    : LOW
+</custom_item>
+
+# Source: PHTN-50-000112.rb (space_left = 25%, space_left_action = SYSLOG)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "auditd.conf must set space_left=25% and space_left_action=SYSLOG"
+  file        : "/etc/audit/auditd.conf"
+  regex       : "(?s)^space_left\s*=\s*25%$.*^space_left_action\s*=\s*SYSLOG$"
+  expect      : "(?s)^space_left\s*=\s*25%$.*^space_left_action\s*=\s*SYSLOG$"
+  severity    : LOW
+</custom_item>
+
+# Source: PHTN-50-000026.rb (audit log file perms/owner)
+<custom_item>
+  type        : CMD_EXEC
+  description : "audit log file must be 0600 and owned by root:root"
+  cmd         : "LOG=$(grep -iw log_file /etc/audit/auditd.conf | awk -F= '{gsub(/ /,\"\");print $2}'); [ -n \"$LOG\" ] && stat -c '%U %G %a' $LOG"
+  expect      : "^root root 600$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= auditd file ownership/permissions =======================
+# Source: PHTN-50-000030.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "auditd config and rules files under /etc/audit must be 0640 and root:root"
+  cmd         : "for f in $(find /etc/audit/ -type f 2>/dev/null); do stat -c '%n %U %G %a' $f; done"
+  expect      : "^/.* root root 64[0-9]$"
+  info        : "Each file must be owned by root:root and not more permissive than 0640"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= audit tools protection =======================
+# Source: PHTN-50-000082.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "audit tools must be root-owned and not overly permissive"
+  cmd         : "for f in /usr/sbin/auditctl /usr/sbin/auditd /usr/sbin/aureport /usr/sbin/ausearch /usr/sbin/autrace /usr/sbin/augenrules; do [ -e $f ] && stat -c '%n %U %G %a' $f; done"
+  expect      : "^/usr/sbin/auditctl root root 75[0-9]$|^/usr/sbin/auditd root root 75[0-9]$|^/usr/sbin/aureport root root 75[0-9]$|^/usr/sbin/ausearch root root 75[0-9]$|^/usr/sbin/autrace root root 75[0-9]$|^/usr/sbin/augenrules root root 75[0-9]$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= audit package integrity =======================
+# Source: PHTN-50-000092.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "rpm verification of audit package must show no modified binaries"
+  cmd         : "rpm -V audit | grep '^..5' | grep -v /etc/audit/auditd.conf"
+  expect      : "^$"
+  severity    : HIGH
+</custom_item>
+
+# ======================= debug-shell service =======================
+# Source: PHTN-50-000210.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "debug-shell.service must be disabled and stopped"
+  cmd         : "systemctl is-enabled debug-shell.service 2>/dev/null || true; systemctl is-active debug-shell.service 2>/dev/null || true"
+  expect      : "^(disabled|static|indirect|masked)$\n^(inactive|failed|unknown)$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= rsyslog service =======================
+# Source: PHTN-50-000242.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "rsyslog service must be enabled and running (unless another syslog is in use)"
+  cmd         : "systemctl is-enabled rsyslog 2>/dev/null && systemctl is-active rsyslog 2>/dev/null"
+  expect      : "^enabled$\n^active$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Account/session and packages =======================
+# Source: PHTN-50-000007.rb (maxlogins 10)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "limits.conf must enforce * hard maxlogins 10"
+  file        : "/etc/security/limits.conf"
+  regex       : "^\*\s+hard\s+maxlogins\s+10$"
+  expect      : "^\*\s+hard\s+maxlogins\s+10$"
+  severity    : LOW
+</custom_item>
+
+# Source: PHTN-50-000012.rb (rsyslog auth.*,authpriv.*,daemon.*)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "rsyslog must log auth.*, authpriv.*, daemon.*"
+  file        : "/etc/rsyslog.conf"
+  regex       : "^auth\.\*;authpriv\.\*;daemon\.\*\s+.+$"
+  expect      : "^auth\.\*;authpriv\.\*;daemon\.\*\s+.+$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000013.rb (openssl-fips-provider installed)
+<custom_item>
+  type        : CMD_EXEC
+  description : "openssl-fips-provider package must be installed"
+  cmd         : "rpm -qa | grep openssl-fips"
+  expect      : "openssl-fips-provider"
+  severity    : HIGH
+</custom_item>
+
+# Source: PHTN-50-000040.rb (telnet not installed)
+<custom_item>
+  type        : CMD_EXEC
+  description : "telnet must not be installed"
+  cmd         : "rpm -qa | grep telnet || true"
+  expect      : "^$"
+  severity    : HIGH
+</custom_item>
+
+# ======================= Bootloader security =======================
+# Source: PHTN-50-000046.rb (GRUB superusers/password)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "grub.cfg must set superusers and password_pbkdf2"
+  file        : "/boot/grub2/grub.cfg"
+  regex       : "(?s)^set\ssuperusers=.*$.*^password_pbkdf2\sroot\sgrub\.pbkdf2\.sha512"
+  expect      : "(?s)^set\ssuperusers=.*$.*^password_pbkdf2\sroot\sgrub\.pbkdf2\.sha512"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Kernel modules hardening =======================
+# Source: PHTN-50-000047.rb (disable modules via modprobe install /bin/false)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "modprobe must disable nonessential modules via install ... /bin/false"
+  file        : "/etc/modprobe.d/modprobe.conf"
+  regex       : "(?s)^install\s+sctp\s+/bin/false$.*^install\s+dccp\s+/bin/false$.*^install\s+dccp_ipv4\s+/bin/false$.*^install\s+dccp_ipv6\s+/bin/false$.*^install\s+ipx\s+/bin/false$.*^install\s+appletalk\s+/bin/false$.*^install\s+decnet\s+/bin/false$.*^install\s+rds\s+/bin/false$.*^install\s+tipc\s+/bin/false$.*^install\s+bluetooth\s+/bin/false$.*^install\s+usb_storage\s+/bin/false$.*^install\s+ieee1394\s+/bin/false$.*^install\s+cramfs\s+/bin/false$.*^install\s+freevxfs\s+/bin/false$.*^install\s+jffs2\s+/bin/false$.*^install\s+hfs\s+/bin/false$.*^install\s+hfsplus\s+/bin/false$.*^install\s+squashfs\s+/bin/false$.*^install\s+udf\s+/bin/false$"
+  expect      : "(?s)^install\s+sctp\s+/bin/false$.*^install\s+dccp\s+/bin/false$.*^install\s+dccp_ipv4\s+/bin/false$.*^install\s+dccp_ipv6\s+/bin/false$.*^install\s+ipx\s+/bin/false$.*^install\s+appletalk\s+/bin/false$.*^install\s+decnet\s+/bin/false$.*^install\s+rds\s+/bin/false$.*^install\s+tipc\s+/bin/false$.*^install\s+bluetooth\s+/bin/false$.*^install\s+usb_storage\s+/bin/false$.*^install\s+ieee1394\s+/bin/false$.*^install\s+cramfs\s+/bin/false$.*^install\s+freevxfs\s+/bin/false$.*^install\s+jffs2\s+/bin/false$.*^install\s+hfs\s+/bin/false$.*^install\s+hfsplus\s+/bin/false$.*^install\s+squashfs\s+/bin/false$.*^install\s+udf\s+/bin/false$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Accounts integrity =======================
+# Source: PHTN-50-000049.rb (no duplicate UIDs)
+<custom_item>
+  type        : CMD_EXEC
+  description : "There must be no duplicate UIDs in /etc/passwd"
+  cmd         : "awk -F ':' 'list[$3]++{print $1, $3}' /etc/passwd"
+  expect      : "^$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= SELinux =======================
+# Source: PHTN-50-000066.rb (SELinux enforcing)
+<custom_item>
+  type        : CMD_EXEC
+  description : "SELinux must be installed and Enforcing"
+  cmd         : "getenforce 2>/dev/null || true"
+  expect      : "^Enforcing$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= /var/log permissions =======================
+# Source: PHTN-50-000073.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "/var/log must be root:root and not more permissive than 0755"
+  cmd         : "stat -c '%U %G %a' /var/log"
+  expect      : "^root root 75[0-5]$|^root root 7[0-4][0-7]$|^root root 6[0-9]{2}$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= audit=1 kernel parameter =======================
+# Source: PHTN-50-000080.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "Kernel cmdline must include audit=1"
+  cmd         : "cat /proc/cmdline"
+  expect      : "audit=1"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Software libraries and integrity tools =======================
+# Source: PHTN-50-000085.rb (library files under /usr/lib must be root:root and not group/other writable)
+<custom_item>
+  type        : CMD_EXEC
+  description : "/usr/lib files must be owned by root:root and not group/other writable"
+  cmd         : "find /usr/lib/ -type f '(' ! -user root -o ! -group root -o -perm /022 ')' -printf '%p, %u:%g:%m\n' 2>/dev/null"
+  expect      : "^$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000127.rb (AIDE installed)
+<custom_item>
+  type        : CMD_EXEC
+  description : "AIDE package must be installed"
+  cmd         : "rpm -qa | grep '^aide'"
+  expect      : "^aide"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Sudo re-authentication =======================
+# Source: PHTN-50-000133.rb (users with NOPASSWD must not have active password hashes)
+<custom_item>
+  type        : CMD_EXEC
+  description : "No users should have NOPASSWD in sudoers with an active password in /etc/shadow"
+  cmd         : "sh -c 'for u in $(awk '\''/NOPASSWD/ && /^[^#%].*/ {print $1}'\'' /etc/sudoers /etc/sudoers.d/* 2>/dev/null | sed '\''s/ALL.*//'\'' | awk '\''{print $1}'\'' | tr -d '\'':'\'' | sort -u); do awk -F: -v user=\"$u\" '\''($1==user && $2 != "!" && $2 != "x") {print user}'\'' /etc/shadow; done'"
+  expect      : "^$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= auditd flush/freq =======================
+# Source: PHTN-50-000186.rb (flush=INCREMENTAL_ASYNC, freq=50)
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "auditd.conf must set flush=INCREMENTAL_ASYNC and freq=50"
+  file        : "/etc/audit/auditd.conf"
+  regex       : "(?s)^\s*flush\s*=\s*INCREMENTAL_ASYNC\s*$.*^\s*freq\s*=\s*50\s*$"
+  expect      : "(?s)^\s*flush\s*=\s*INCREMENTAL_ASYNC\s*$.*^\s*freq\s*=\s*50\s*$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Privileged functions auditing =======================
+# Source: PHTN-50-000107.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "All setuid/setgid files must have audit rules (perm=x, auid>=1000, auid!=unset)"
+  cmd         : "sh -c 'for f in $(find / -xdev -path /var/lib/containerd -prune -o -path /var/lib/docker -prune -o \( -perm -4000 -o -perm -2000 \) -type f -print 2>/dev/null); do line=$(auditctl -l | grep " -F path=$f " | grep " -F perm=x " | grep " -F auid>=1000 " | grep -E " -F (auid!=-1|auid!=unset) " | grep -E " -k (privileged|execpriv)" ); [ -n \"$line\" ] || echo $f; done'"
+  expect      : "^$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Repo gpgcheck =======================
+# Source: PHTN-50-000199.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "All repos must set gpgcheck=1"
+  cmd         : "sh -c 'for f in /etc/yum.repos.d/*.repo 2>/dev/null; do [ -f \"$f\" ] || continue; grep -q "^gpgcheck=1$" \"$f\" || echo \"$f\"; done'"
+  expect      : "^$"
+  severity    : HIGH
+</custom_item>
+
+# ======================= Disable ctrl-alt-del target =======================
+# Source: PHTN-50-000222.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "ctrl-alt-del.target must be masked and inactive"
+  cmd         : "systemctl is-enabled ctrl-alt-del.target 2>/dev/null && systemctl is-active ctrl-alt-del.target 2>/dev/null"
+  expect      : "^masked$\n^(inactive|failed)$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= SSH host key permissions =======================
+# Source: PHTN-50-000233.rb (public keys 0644)
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSH public host keys must be 0644 and owned by root:root"
+  cmd         : "sh -c 'for f in /etc/ssh/*key.pub; do [ -e \"$f\" ] || continue; s=$(stat -c \"%U %G %a\" \"$f\"); [ \"$s\" = \"root root 644\" ] || echo \"$f $s\"; done'"
+  expect      : "^$"
+  severity    : MEDIUM
+</custom_item>
+
+# Source: PHTN-50-000234.rb (private keys 0600)
+<custom_item>
+  type        : CMD_EXEC
+  description : "SSH private host keys must be 0600 and owned by root:root"
+  cmd         : "sh -c 'for f in $(find /etc/ssh -maxdepth 1 -type f -name "*key" ! -name "*key.pub"); do s=$(stat -c \"%U %G %a\" \"$f\"); [ \"$s\" = \"root root 600\" ] || echo \"$f $s\"; done'"
+  expect      : "^$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Disable systemd fallback DNS =======================
+# Source: PHTN-50-000236.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "Systemd fallback DNS must be disabled"
+  cmd         : "resolvectl status | grep '^Fallback DNS'"
+  expect      : "^$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= AIDE configuration =======================
+# Source: PHTN-50-000237.rb
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "aide.conf must define STIG profile"
+  file        : "/etc/aide.conf"
+  regex       : "^STIG\s*=\s*p\+i\+n\+u\+g\+s\+m\+S$"
+  expect      : "^STIG\s*=\s*p\+i\+n\+u\+g\+s\+m\+S$"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "aide.conf must define LOGS profile"
+  file        : "/etc/aide.conf"
+  regex       : "^LOGS\s*=\s*p\+n\+u\+g$"
+  expect      : "^LOGS\s*=\s*p\+n\+u\+g$"
+  severity    : MEDIUM
+</custom_item>
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "aide.conf must include /boot STIG, /opt STIG, /usr STIG, /etc STIG, /var/log LOGS"
+  file        : "/etc/aide.conf"
+  regex       : "(?s)^/boot\s+STIG$.*^/opt\s+STIG$.*^/usr\s+STIG$.*^/etc\s+STIG$.*^/var/log\s+LOGS$"
+  expect      : "(?s)^/boot\s+STIG$.*^/opt\s+STIG$.*^/usr\s+STIG$.*^/etc\s+STIG$.*^/var/log\s+LOGS$"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= rsyslog installation =======================
+# Source: PHTN-50-000241.rb
+<custom_item>
+  type        : CMD_EXEC
+  description : "rsyslog package must be installed"
+  cmd         : "rpm -qa | grep '^rsyslog-'"
+  expect      : "^rsyslog-"
+  severity    : MEDIUM
+</custom_item>
+
+# ======================= Secure /tmp mount options =======================
+# Source: PHTN-50-000245.rb
+<custom_item>
+  type        : FILE_CONTENT_CHECK
+  description : "/tmp must be mounted with nosuid,nodev,noexec"
+  file        : "/lib/systemd/system/tmp.mount"
+  regex       : "^Options=.*(nosuid).*(nodev).*(noexec).*$"
+  expect      : "^Options=.*(nosuid).*(nodev).*(noexec).*$"
+  severity    : MEDIUM
+</custom_item>
+
+
+</check_type>

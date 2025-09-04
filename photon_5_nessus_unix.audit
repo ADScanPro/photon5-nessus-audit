@@ -1179,7 +1179,7 @@
 <custom_item>
   type        : CMD_EXEC
   description : "No users should have NOPASSWD in sudoers with an active password in /etc/shadow"
-  cmd         : "sh -c 'for u in $(awk '\''/NOPASSWD/ && /^[^#%].*/ {print $1}'\'' /etc/sudoers /etc/sudoers.d/* 2>/dev/null | sed '\''s/ALL.*//'\'' | awk '\''{print $1}'\'' | tr -d '\'':'\'' | sort -u); do awk -F: -v user=\"$u\" '\''($1==user && $2 != "!" && $2 != "x") {print user}'\'' /etc/shadow; done'"
+  cmd         : "sh -c 'for u in $(awk '\''/NOPASSWD/ && /^[^#%].*/ {print $1}'\'' /etc/sudoers /etc/sudoers.d/* 2>/dev/null | sed '\''s/ALL.*//\'' | awk '\''{print $1}'\'' | tr -d '\'':'\'' | sort -u); do awk -F: -v user=\"$u\" '\''($1==user && $2 !~ /^(!|x)$/) {print user}'\'' /etc/shadow; done'"
   expect      : "^$"
   severity    : MEDIUM
 </custom_item>

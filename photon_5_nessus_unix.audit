@@ -260,7 +260,6 @@
   file        : "/etc/security/pwquality.conf"
   regex       : "^minlen\\s*=\\s*(1[5-9]|[2-9][0-9]+)$"
   expect      : "^minlen\\s*=\\s*(1[5-9]|[2-9][0-9]+)$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 <custom_item>
@@ -279,7 +278,6 @@
   file        : "/etc/security/pwquality.conf"
   regex       : "^ucredit\\s*=\\s*-1$"
   expect      : "^ucredit\\s*=\\s*-1$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -290,7 +288,6 @@
   file        : "/etc/security/pwquality.conf"
   regex       : "^dcredit\\s*=\\s*-1$"
   expect      : "^dcredit\\s*=\\s*-1$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -301,7 +298,6 @@
   file        : "/etc/security/pwquality.conf"
   regex       : "^lcredit\\s*=\\s*-1$"
   expect      : "^lcredit\\s*=\\s*-1$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -312,7 +308,6 @@
   file        : "/etc/security/pwquality.conf"
   regex       : "^ocredit\\s*=\\s*-1$"
   expect      : "^ocredit\\s*=\\s*-1$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -323,7 +318,6 @@
   file        : "/etc/security/pwquality.conf"
   regex       : "^difok\\s*=\\s*(8|[9]|[1-9][0-9]+)$"
   expect      : "^difok\\s*=\\s*(8|[9]|[1-9][0-9]+)$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -334,7 +328,6 @@
   file        : "/etc/security/pwquality.conf"
   regex       : "^dictcheck\\s*=\\s*1$"
   expect      : "^dictcheck\\s*=\\s*1$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -345,7 +338,6 @@
   file        : "/etc/security/pwquality.conf"
   regex       : "^enforce_for_root(\s*=.*)?$"
   expect      : "^enforce_for_root(\s*=.*)?$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -644,7 +636,6 @@
   file        : "/etc/systemd/timesyncd.conf"
   regex       : "^NTP=.+$"
   expect      : "^NTP=.+$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -655,7 +646,6 @@
   file        : "/etc/ntp.conf"
   regex       : "^\s*(server|peer|multicastclient)\s+.+$"
   expect      : "^\s*(server|peer|multicastclient)\s+.+$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -666,7 +656,6 @@
   file        : "/etc/chrony/chrony.conf"
   regex       : "^\s*server\s+.+$"
   expect      : "^\s*server\s+.+$"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 
@@ -814,7 +803,6 @@
   description : "sysctl net.ipv4.ip_forward must be 0 (N/A for container hosts)"
   cmd         : "/sbin/sysctl net.ipv4.ip_forward 2>/dev/null || cat /proc/sys/net/ipv4/ip_forward"
   expect      : "(net.ipv4.ip_forward = 0|^0$)"
-  optional    : YES
   severity    : MEDIUM
 </custom_item>
 

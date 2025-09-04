@@ -85,9 +85,9 @@ The audit was built by converting Photon 5 STIG-like Ruby controls (PHTN-50-*.rb
 - PHTN-50-000199 -> repos gpgcheck=1 (CMD_EXEC)
 
 ### Time synchronization
-- PHTN-50-000121 -> timesyncd NTP configured (optional) (FILE_CONTENT_CHECK)
-- PHTN-50-000121 -> ntpd servers/peer/multicastclient configured (optional) (FILE_CONTENT_CHECK)
-- PHTN-50-000121 -> chrony server configured (optional) (FILE_CONTENT_CHECK)
+- PHTN-50-000121 -> timesyncd NTP configured (if used) (FILE_CONTENT_CHECK)
+- PHTN-50-000121 -> ntpd servers/peer/multicastclient configured (if used) (FILE_CONTENT_CHECK)
+- PHTN-50-000121 -> chrony server configured (if used) (FILE_CONTENT_CHECK)
 
 ### rsyslog
 - PHTN-50-000074 -> $umask 0037 (FILE_CONTENT_CHECK)
@@ -112,7 +112,7 @@ The audit was built by converting Photon 5 STIG-like Ruby controls (PHTN-50-*.rb
 - PHTN-50-000222 -> ctrl-alt-del.target masked/inactive (CMD_EXEC)
 
 ### Kernel/sysctl
-- PHTN-50-000231 -> net.ipv4.ip_forward = 0 (CMD_EXEC, optional)
+- PHTN-50-000231 -> net.ipv4.ip_forward = 0 (CMD_EXEC; may be N/A on container hosts)
 - PHTN-50-000223 -> accept_source_route = 0 for v4/v6 (CMD_EXEC)
 - PHTN-50-000224 -> net.ipv4.icmp_echo_ignore_broadcasts = 1 (CMD_EXEC)
 - PHTN-50-000225 -> accept_redirects = 0 (CMD_EXEC)
@@ -133,7 +133,7 @@ The audit was built by converting Photon 5 STIG-like Ruby controls (PHTN-50-*.rb
 - PHTN-50-000182 -> /proc/sys/crypto/fips_enabled = 1 (FILE_CONTENT_CHECK)
 
 ## Notes
-- Some checks are marked optional because only one time service is typically in use.
+- Some checks are environment-dependent (e.g., only one time service is typically in use, and container hosts may differ). This audit file does not use the non-standard 'optional' attribute for broader parser compatibility. If a check does not apply to your environment, adjust or comment it out accordingly.
 - The SSHD crypto checks (Ciphers/MACs) enforce that only approved algorithms are present. The command outputs are matched against an allow-list regex.
 - If you need to adapt values (e.g., different grace times or cipher suites), modify the corresponding `expect` lines in the `.audit` file.
 
